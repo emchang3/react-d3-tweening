@@ -8,6 +8,22 @@ import { colorScale } from '../util';
 class PieChart extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            focused: null
+        }
+    }
+
+    setFocus = (index) => {
+        this.setState({
+            focused: index
+        });
+    }
+
+    resetFocus = () => {
+        this.setState({
+            focused: null
+        });
     }
 
     render() {
@@ -30,15 +46,30 @@ class PieChart extends React.Component {
         const myData = pie(this.props.data);
 
         const groups = myData.map((dataPoint, index) => {
-            const myColor = colorScale(dataPoint.data, [ 70, 130, 180 ], this.props.data)
+            const myColor = colorScale(dataPoint.data, [ 70, 130, 180 ], this.props.data, this.state.focused, index);
+
+        const opacity = this.state.focused !== null && this.state.focused !== index ? 0.4 : 1
+
+        const textColor = this.state.focused === index ? 'white' : 'black'
 
             return (
                 <g
                     key={`arc-${index}`}
                     transform={`translate(${this.props.width / 2}, ${this.props.height / 2})`}
+                    opacity={opacity}
                 >
-                    <path d={arc(dataPoint)}  fill={myColor} />
-                    <text transform={`translate(${labelArc.centroid(dataPoint)})`}>
+                    <path
+                        d={arc(dataPoint)}
+                        fill={myColor}
+                        onMouseOver={ (evt) => {
+                            this.setFocus(index);
+                        }}
+                        onMouseOut={this.resetFocus}
+                    />
+                    <text
+                        transform={`translate(${labelArc.centroid(dataPoint)})`}
+                        fill={textColor}
+                    >
                         {dataPoint.data}
                     </text>
                 </g>

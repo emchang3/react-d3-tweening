@@ -8,6 +8,22 @@ import { colorScale } from '../util';
 class BarChart extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            focused: null
+        }
+    }
+
+    setFocus = (index) => {
+        this.setState({
+            focused: index
+        });
+    }
+
+    resetFocus = () => {
+        this.setState({
+            focused: null
+        });
     }
 
     render() {
@@ -18,12 +34,17 @@ class BarChart extends React.Component {
         const groups = this.props.data.map((dataPoint, index) => {
             const translateDist = index * this.props.barHeight;
 
-            const myColor = colorScale(dataPoint, [ 70, 130, 180 ], this.props.data)
+            const myColor = colorScale(dataPoint, [ 70, 130, 180 ], this.props.data, this.state.focused, index);
+
+            const opacity = this.state.focused !== null && this.state.focused !== index ? 0.4 : 1
+
+            const textColor = this.state.focused === index ? 'white' : 'black'
 
             return (
                 <g
                     transform={`translate(0, ${translateDist})`}
                     key={`rect-${index}`}
+                    opacity={opacity}
                 >
                     <rect
                         width={x(dataPoint)}
@@ -31,11 +52,16 @@ class BarChart extends React.Component {
                         rx={3}
                         ry={3}
                         fill={myColor}
+                        onMouseOver={ (evt) => {
+                            this.setFocus(index);
+                        }}
+                        onMouseOut={this.resetFocus}
                     />
                     <text
                         x={x(dataPoint) - 12}
                         y={this.props.barHeight / 2}
                         dy={'.35em'}
+                        fill={textColor}
                     >
                         {dataPoint}
                     </text>

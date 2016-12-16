@@ -1,7 +1,7 @@
 // steelblue: 70, 130, 180
 import * as d3 from 'd3';
 
-export const colorScale = (point, color, data) => {
+export const colorScale = (point, color, data, focused, index) => {
     let min = 0;
     let max = 0;
 
@@ -13,7 +13,11 @@ export const colorScale = (point, color, data) => {
     const range = max - min;
     const spot = point - min;
 
-    const ratio = spot / range;
+    let ratio = spot / range;
+
+    if (focused === index) {
+        ratio = 1.25;
+    }
 
     // Need to map it in reverse to the color.
 

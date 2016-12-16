@@ -12,7 +12,7 @@ import data from './data/personal_stackoverflow_usage';
 
 const initialState = {
     data: {
-        chart1data: [ 4, 8, 12, 16, 20, 24 ]
+        chart1data: [ 4, 8, 12, 16, 20 ]
     }
 }
 
