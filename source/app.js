@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BarChart from './chart';
-import PieChart from './chart2';
+import BarChart from './charts/barChart';
+import PieChart from './charts/pieChart';
 import NumbersChanger from './numbersChanger';
 
 export const App = () => {
@@ -20,7 +20,7 @@ export const App = () => {
 
     return (
         <div style={appStyle}>
-            <div style={innerStyle}>
+            <div style={{ ...innerStyle, paddingRight: '80px' }}>
                 <BarChart
                     id={'myBarChart'}
                     width={420}
@@ -34,7 +34,12 @@ export const App = () => {
                     dataSet={'chart1'}
                 />
             </div>
-            <NumbersChanger dataSet={'chart1'} />
+            <div style={{ ...innerStyle, width: '200px' }}>
+                <h2>
+                    Enter new numbers to see the charts change.
+                </h2>
+                <NumbersChanger dataSet={'chart1'} />
+            </div>
         </div>
     )
 }

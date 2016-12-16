@@ -22,11 +22,14 @@ class NumbersChanger extends React.Component {
     }
 
     render() {
+        const justNumbers = this.props.data.map((dataPoint) => {
+            return dataPoint.value
+        });
+        
         const numbersChangerStyle = {
             display: 'flex',
             flexDirection: 'column',
-            alignContent: 'center',
-            paddingLeft: '80px'
+            alignContent: 'center'
         }
 
         const changers = this.props.data.map((number, index) => {
@@ -37,7 +40,7 @@ class NumbersChanger extends React.Component {
                         this.changeNumber(index, evt.target.value)
                     }}
                     key={`nc-${index}`}
-                    style={{ marginBottom: '3px' }}
+                    style={{ marginBottom: '3px', width: '100%' }}
                 />
             )
         });

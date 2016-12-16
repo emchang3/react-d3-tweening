@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
-import { colorScale } from './util';
+import { colorScale } from '../util';
 
 class BarChart extends React.Component {
     constructor(props) {
@@ -28,6 +28,8 @@ class BarChart extends React.Component {
                     <rect
                         width={x(dataPoint)}
                         height={this.props.barHeight - 3}
+                        rx={3}
+                        ry={3}
                         fill={myColor}
                     />
                     <text

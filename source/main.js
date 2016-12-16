@@ -8,9 +8,11 @@ import { Provider } from 'react-redux'; // eslint-disable-line no-unused-vars
 import { App } from './app';
 import { reducer } from './reducer';
 
+import data from './data/personal_stackoverflow_usage';
+
 const initialState = {
     data: {
-        chart1data: [ 4, 8, 15, 16, 23, 42 ]
+        chart1data: [ 4, 8, 12, 16, 20, 24 ]
     }
 }
 

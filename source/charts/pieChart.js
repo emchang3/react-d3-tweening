@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
-import { colorScale } from './util';
+import { colorScale } from '../util';
 
 class PieChart extends React.Component {
     constructor(props) {
@@ -16,6 +16,7 @@ class PieChart extends React.Component {
         const arc = d3.arc()
             .innerRadius(radius / 2)
             .outerRadius(radius)
+            .cornerRadius(3)
             .padAngle(0.0174533);
 
         const pie = d3.pie()
@@ -37,7 +38,9 @@ class PieChart extends React.Component {
                     transform={`translate(${this.props.width / 2}, ${this.props.height / 2})`}
                 >
                     <path d={arc(dataPoint)}  fill={myColor} />
-                    <text transform={`translate(${labelArc.centroid(dataPoint)})`}>{dataPoint.data}</text>
+                    <text transform={`translate(${labelArc.centroid(dataPoint)})`}>
+                        {dataPoint.data}
+                    </text>
                 </g>
             );
         });
