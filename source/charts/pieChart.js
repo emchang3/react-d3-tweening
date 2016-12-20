@@ -27,13 +27,9 @@ class PieChart extends React.Component {
     }
 
     render() {
-        const radius = Math.min(this.props.width, this.props.height) / 2;
+        const radius = Math.min(this.props.width, this.props.height) / 4;
 
-        const arc = d3.arc()
-            .innerRadius(radius / 2)
-            .outerRadius(radius)
-            .cornerRadius(3)
-            .padAngle(0.0174533);
+
 
         const pie = d3.pie()
             .value((d) => { return d; })
@@ -48,23 +44,33 @@ class PieChart extends React.Component {
         const groups = myData.map((dataPoint, index) => {
             const myColor = colorScale(dataPoint.data, [ 70, 130, 180 ], this.props.data, this.state.focused, index);
 
-        const opacity = this.state.focused !== null && this.state.focused !== index ? 0.4 : 1
+            const opacity = this.state.focused !== null && this.state.focused !== index ? 0.4 : 1
 
-        const textColor = this.state.focused === index ? 'white' : 'black'
+            const textColor = this.state.focused === index ? 'white' : 'black'
+
+            let innerRadius = radius / 2;
+
+            let outerRadius = this.state.focused === index ? radius * 1.1 : radius
+
+            const arc = d3.arc()
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius)
+                .cornerRadius(3)
+                .padAngle(0.0174533);
 
             return (
                 <g
                     key={`arc-${index}`}
                     transform={`translate(${this.props.width / 2}, ${this.props.height / 2})`}
                     opacity={opacity}
+                    onMouseOver={(evt) => {
+                        this.setFocus(index);
+                    }}
+                    onMouseOut={this.resetFocus}
                 >
                     <path
                         d={arc(dataPoint)}
                         fill={myColor}
-                        onMouseOver={ (evt) => {
-                            this.setFocus(index);
-                        }}
-                        onMouseOut={this.resetFocus}
                     />
                     <text
                         transform={`translate(${labelArc.centroid(dataPoint)})`}

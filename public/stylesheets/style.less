@@ -9,7 +9,11 @@ a {
 
 .chart text {
   font: 10px sans-serif;
-  text-anchor: end;
+}
+
+.bar text {
+    font: 10px sans-serif;
+    text-anchor: end;
 }
 
 .arc text {
@@ -17,11 +21,23 @@ a {
   text-anchor: middle;
 }
 
-.axis path,
+// .axis path,
 .axis line {
   fill: none;
   stroke: #000;
+  stroke-width: 1px;
   shape-rendering: crispEdges;
+  stroke-width: 1px;
+}
+
+.axis--x path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke-width: 1.5px;
+  text-anchor: start;
 }
 
 // .example-enter {

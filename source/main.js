@@ -8,11 +8,20 @@ import { Provider } from 'react-redux'; // eslint-disable-line no-unused-vars
 import { App } from './app';
 import { reducer } from './reducer';
 
-import data from './data/personal_stackoverflow_usage';
+import islf from './data/income_share_lowest_fifth';
+import issf from './data/income_share_second_fifth';
+import istf from './data/income_share_third_fifth';
+import isff from './data/income_share_fourth_fifth';
+import ishf from './data/income_share_highest_fifth';
 
 const initialState = {
     data: {
-        chart1data: [ 4, 8, 12, 16, 20 ]
+        chart1data: [ 4, 8, 12, 16, 20 ],
+        is_lfdata: islf,
+        is_sfdata: issf,
+        is_tfdata: istf,
+        is_ffdata: isff,
+        is_hfdata: ishf
     }
 }
 

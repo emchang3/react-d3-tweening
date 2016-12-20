@@ -45,6 +45,10 @@ class BarChart extends React.Component {
                     transform={`translate(0, ${translateDist})`}
                     key={`rect-${index}`}
                     opacity={opacity}
+                    onMouseOver={(evt) => {
+                        this.setFocus(index);
+                    }}
+                    onMouseOut={this.resetFocus}
                 >
                     <rect
                         width={x(dataPoint)}
@@ -52,10 +56,6 @@ class BarChart extends React.Component {
                         rx={3}
                         ry={3}
                         fill={myColor}
-                        onMouseOver={ (evt) => {
-                            this.setFocus(index);
-                        }}
-                        onMouseOut={this.resetFocus}
                     />
                     <text
                         x={x(dataPoint) - 12}
@@ -73,7 +73,7 @@ class BarChart extends React.Component {
             <div style={{ paddingBottom: '16px' }}>
                 <svg
                     id={this.props.id}
-                    className="chart"
+                    className="chart bar"
                     width={this.props.width}
                     height={this.props.barHeight * this.props.data.length}
                 >
