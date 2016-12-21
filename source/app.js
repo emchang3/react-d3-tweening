@@ -58,7 +58,7 @@ export const App = () => {
                         height={300}
                         margin={{ top: 20, right: 140, bottom: 30, left: 50 }}
                         dataSet={
-                            [ 'is_lf', 'is_sf', 'is_tf', 'is_ff', 'is_hf' ]
+                            [ 'is_lf', 'is_sf', 'is_tf', 'is_ff', 'is_hf', 'is_t5p' ]
                         }
                     />
                 </div>

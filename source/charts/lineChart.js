@@ -63,29 +63,57 @@ class LineChart extends React.Component {
             .y((d) => { return this.genYScale(this.props)(d.share); });
 
         let groups = [];
-        
+
         for (var i = 0; i < this.props.dataSet.length; i++) {
 
             // Manually creating text.
             let text = '';
             switch (i) {
                 case 0:
-                    text = 'Bottom Fifth';
+                    text = `Bottom Fifth: ${this.props[`data${i}`][0].share}%`;
                     break;
                 case 1:
-                    text = 'Second Fifth';
+                    text = `Second Fifth: ${this.props[`data${i}`][0].share}%`;
                     break;
                 case 2:
-                    text = 'Third Fifth'
+                    text = `Third Fifth: ${this.props[`data${i}`][0].share}%`;
                     break;
                 case 3:
-                    text = 'Fourth Fifth'
+                    text = `Fourth Fifth: ${this.props[`data${i}`][0].share}%`;
                     break;
                 case 4:
-                    text = 'Top Fifth'
+                    text = `Top Fifth: ${this.props[`data${i}`][0].share}%`;
+                    break;
+                case 5:
+                    text = `Top 5%: ${this.props[`data${i}`][0].share}%`;
                     break;
                 default:
                     text = text;
+                    break;
+            }
+
+            let text2 = '';
+            switch (i) {
+                case 0:
+                    text2 = `${this.props[`data${i}`][49].share}%`;
+                    break;
+                case 1:
+                    text2 = `${this.props[`data${i}`][49].share}%`;
+                    break;
+                case 2:
+                    text = `${this.props[`data${i}`][49].share}%`;
+                    break;
+                case 3:
+                    text2 = `${this.props[`data${i}`][49].share}%`;
+                    break;
+                case 4:
+                    text2 = `${this.props[`data${i}`][49].share}%`;
+                    break;
+                case 5:
+                    text2 = `${this.props[`data${i}`][49].share}%`;
+                    break;
+                default:
+                    text2 = text2;
                     break;
             }
 
@@ -100,13 +128,21 @@ class LineChart extends React.Component {
             const textLocX = this.props.width - this.props.margin.right - 40;
             const textLocY = this.genYScale(this.props)(point);
 
+            const startPoint = this.props[`data${i}`][49].share;
+            const text2LocX = this.props.margin.left - 25;
+            const text2LocY = this.genYScale(this.props)(startPoint);
+
             // Stroke color.
-            const stroke = colorScale2(point, color, max);
+            let stroke = colorScale2(point, color, max);
+
+
+            if (i === 5) stroke = 'red';
 
             groups.push(
                 <g key={`g-line${i}`}>
                     <path d={line} className="line" stroke={stroke} />
                     <text x={textLocX} y={textLocY}>{text}</text>
+                    <text x={text2LocX} y={text2LocY}>{text2}</text>
                 </g>
             );
         }
