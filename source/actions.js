@@ -1,8 +1,15 @@
-export const SET__DATA = 'SET__DATA';
+import * as actionTypes from './actionTypes';
 
 export const setData = (payload) => {
     return {
-        type: SET__DATA,
+        type: actionTypes.SET__DATA,
         payload: payload
-    }
-}
+    };
+};
+
+export const tweenDistribution = (payload) => {
+    return {
+        type: actionTypes.TWEEN__DISTRIBUTION,
+        payload: payload
+    };
+};

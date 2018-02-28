@@ -9,27 +9,19 @@ class PieChart extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            focused: null
-        }
+        this.state = { focused: null };
     }
 
     setFocus = (index) => {
-        this.setState({
-            focused: index
-        });
+        this.setState({ focused: index });
     }
 
     resetFocus = () => {
-        this.setState({
-            focused: null
-        });
+        this.setState({ focused: null });
     }
 
     render() {
         const radius = Math.min(this.props.width, this.props.height) / 4;
-
-
 
         const pie = d3.pie()
             .value((d) => { return d; })
@@ -42,15 +34,26 @@ class PieChart extends React.Component {
         const myData = pie(this.props.data);
 
         const groups = myData.map((dataPoint, index) => {
-            const myColor = colorScale(dataPoint.data, [ 70, 130, 180 ], this.props.data, this.state.focused, index);
+            const myColor = colorScale(
+                dataPoint.data,
+                [ 70, 130, 180 ],
+                this.props.data,
+                this.state.focused,
+                index
+            );
 
-            const opacity = this.state.focused !== null && this.state.focused !== index ? 0.4 : 1
+            const opacity = (
+                this.state.focused !== null &&
+                this.state.focused !== index
+            ) ? 0.5 : 1
 
             const textColor = this.state.focused === index ? 'white' : 'black'
 
             let innerRadius = radius / 2;
 
-            let outerRadius = this.state.focused === index ? radius * 1.1 : radius
+            let outerRadius = this.state.focused === index
+                ? radius * 1.1
+                : radius
 
             const arc = d3.arc()
                 .innerRadius(innerRadius)
@@ -76,7 +79,7 @@ class PieChart extends React.Component {
                         transform={`translate(${labelArc.centroid(dataPoint)})`}
                         fill={textColor}
                     >
-                        {dataPoint.data}
+                        {this.props.targets[index]}
                     </text>
                 </g>
             );
@@ -99,7 +102,8 @@ class PieChart extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        data: state.data[`${ownProps.dataSet}data`]
+        data: state.data,
+        targets: state.targets
     }
 }
 

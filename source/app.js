@@ -30,12 +30,12 @@ export const App = () => {
         <div style={appStyle}>
             <div style={middleStyle}>
                 <div style={{ ...innerStyle, paddingRight: '80px' }}>
-                    <BarChart
+                    {/* <BarChart
                         id={'myBarChart'}
                         width={420}
                         barHeight={40}
                         dataSet={'chart1'}
-                    />
+                    /> */}
                     <PieChart
                         id={'myPieChart'}
                         width={420}
@@ -50,7 +50,7 @@ export const App = () => {
                     <NumbersChanger dataSet={'chart1'} />
                 </div>
             </div>
-            <div style={middleStyle}>
+            {/* <div style={middleStyle}>
                 <div style={innerStyle}>
                     <LineChart
                         id={'myLineChart'}
@@ -62,7 +62,7 @@ export const App = () => {
                         }
                     />
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

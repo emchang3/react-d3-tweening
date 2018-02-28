@@ -1,13 +1,28 @@
-import { SET__DATA } from './actions';
+import * as actionTypes from './actionTypes';
 
 export const reducer = (state = {}, action) => {
+    const payload = action.payload;
+
     switch (action.type) {
-        case SET__DATA:
-            console.log('SET__DATA in reducer: ', action.payload);
-            const newData = {}
-            newData[`${action.payload.dataSet}data`] = action.payload.data
-            return { ...state, data: { ...state.data, ...newData } };
+        case actionTypes.SET__DATA:
+            // console.log('SET__DATA in reducer:', payload);
+
+            return { ...state, data: payload };
+        case actionTypes.TWEEN__DISTRIBUTION:
+            // console.log('TWEEN__DISTRIBUTION in reducer:', payload);
+
+            const index = payload.index;
+            const targets = state.targets;
+
+            return {
+                ...state,
+                targets: [
+                    ...targets.slice(0, index),
+                    payload.value,
+                    ...targets.slice(index + 1)
+                ]
+            };
         default:
             return state;
     }
-}
+};
