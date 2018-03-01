@@ -14,7 +14,9 @@ const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {
     data: [ 4, 8, 12, 16, 20 ],
-    targets: [ 4, 8, 12, 16, 20 ]
+    targets: [ 4, 8, 12, 16, 20 ],
+    radialStati: [ 1, 1, 1, 1, 1 ],
+    radialTargets: [ 1, 1, 1, 1, 1 ]
 };
 
 export const store = createStore(reducer, initialState, compose(

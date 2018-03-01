@@ -33,6 +33,10 @@ class NumbersChanger extends React.Component {
         if (key === 'ArrowDown') this.changeNumber(index, value - 1);
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({ data: nextProps.data });
+    }
+
     render() {
         const numbersChangerStyle = {
             display: 'flex',

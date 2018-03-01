@@ -22,6 +22,15 @@ export const reducer = (state = {}, action) => {
                     ...targets.slice(index + 1)
                 ]
             };
+        case actionTypes.SET__RADII:
+            return { ...state, radialStati: payload };
+        case actionTypes.TWEEN__RADII:
+            console.log('TWEEN__RADII in reducer:', payload);
+
+            return {
+                ...state,
+                radialTargets: payload
+            };
         default:
             return state;
     }

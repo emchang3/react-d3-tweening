@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
 import { colorScale } from '../util';
+import { tweenRadii } from '../actions';
 
 class PieChart extends React.Component {
     constructor(props) {
@@ -13,10 +14,19 @@ class PieChart extends React.Component {
     }
 
     setFocus = (index) => {
+        const radialStati = [ 1, 1, 1, 1, 1 ];
+        radialStati[index] = 1.1;
+
+        this.props.tweenRadii(radialStati);
+
         this.setState({ focused: index });
     }
 
     resetFocus = () => {
+        const radialStati = [ 1, 1, 1, 1, 1 ];
+
+        this.props.tweenRadii(radialStati);
+
         this.setState({ focused: null });
     }
 
@@ -45,15 +55,13 @@ class PieChart extends React.Component {
             const opacity = (
                 this.state.focused !== null &&
                 this.state.focused !== index
-            ) ? 0.5 : 1
+            ) ? 0.7 : 1
 
             const textColor = this.state.focused === index ? 'white' : 'black'
 
             let innerRadius = radius / 2;
 
-            let outerRadius = this.state.focused === index
-                ? radius * 1.1
-                : radius
+            const outerRadius = radius * this.props.radialStati[index];
 
             const arc = d3.arc()
                 .innerRadius(innerRadius)
@@ -103,8 +111,15 @@ class PieChart extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         data: state.data,
-        targets: state.targets
-    }
-}
+        targets: state.targets,
+        radialStati: state.radialStati
+    };
+};
 
-export default connect(mapStateToProps)(PieChart);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        tweenRadii: (radii) => dispatch(tweenRadii(radii))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PieChart);

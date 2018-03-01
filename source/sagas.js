@@ -1,54 +1,57 @@
 // import { , takeLatest } from 'redux-saga/effects';
-import { all, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
+
+import { redistribute, setRadius } from './animations';
 
 function* helloSaga() {
     console.log('--- INIT ---');
 }
 
-const animate = (index, getState, dispatch) => {
-    return new Promise((resolve, reject) => {
-        const startTime = new Date().getTime();
-
-        const tweenTimer = setInterval(() => {
-            const state = getState();
-            const data = state.data;
-
-            const step = Math.min(1, (new Date().getTime() - startTime) / 2000);
-
-            const current = data[index];
-            const target = state.targets[index];
-            const interValue = current + ((target - current) * step);
-
-            dispatch(actions.setData([
-                ...data.slice(0, index),
-                interValue,
-                ...data.slice(index + 1)
-            ]));
-
-            if (current === target) {
-                clearInterval(tweenTimer);
-                resolve(true);
-            }
-        }, 0.0001);
-    });
-};
-
-function* tweener(getState, dispatch, action) {
+function* tweenDist(getState, dispatch, action) {
     // console.log('--- TWEEN ---');
     
-    yield* animate(action.payload.index, getState, dispatch);
+    yield* redistribute(action.payload.index, getState, dispatch);
+}
+
+function* tweenRad(getState, dispatch, action) {
+    const args = action.payload.map((val, idx) => {
+        return [ idx, getState, dispatch ];
+    });
+
+    yield all([
+        call(setRadius, ...args[0]),
+        call(setRadius, ...args[1]),
+        call(setRadius, ...args[2]),
+        call(setRadius, ...args[3]),
+        call(setRadius, ...args[4])
+    ]);
 }
 
 function* watchDistribution(getState, dispatch) {
-    yield takeEvery(actionTypes.TWEEN__DISTRIBUTION, tweener, getState, dispatch);
+    yield takeEvery(
+        actionTypes.TWEEN__DISTRIBUTION,
+        tweenDist,
+        getState,
+        dispatch
+    );
+}
+
+function* watchRadii(getState, dispatch) {
+    yield takeEvery(
+        actionTypes.TWEEN__RADII,
+        tweenRad,
+        getState,
+        dispatch
+    );
 }
 
 export default function* rootSaga(getState, dispatch) {
     yield all([
         helloSaga(),
-        watchDistribution(getState, dispatch)
+        watchDistribution(getState, dispatch),
+        watchRadii(getState, dispatch)
     ]);
 }
