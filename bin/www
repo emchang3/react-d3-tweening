@@ -20,6 +20,19 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+  setInterval(function() {
+
+    const rands = [];
+    for (let i = 0; i < 5; i++) {
+      rands.push(parseInt(Math.random() * 16) + 4);
+    }
+
+    socket.emit('data', rands);
+  }, 5000);
+});
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -27,3 +27,10 @@ export const tweenRadii = (payload) => {
         payload: payload
     };
 };
+
+export const setSocketStatus = (payload) => {
+    return {
+        type: actionTypes.SET__SOCKET_STATUS,
+        payload: payload
+    };
+};

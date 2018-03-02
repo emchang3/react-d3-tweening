@@ -11,9 +11,17 @@ function* helloSaga() {
 }
 
 function* tweenDist(getState, dispatch, action) {
-    // console.log('--- TWEEN ---');
-    
-    yield* redistribute(action.payload.index, getState, dispatch);
+    const args = action.payload.map((val, idx) => {
+        return [ idx, getState, dispatch ];
+    });
+
+    yield all([
+        call(redistribute, ...args[0]),
+        call(redistribute, ...args[1]),
+        call(redistribute, ...args[2]),
+        call(redistribute, ...args[3]),
+        call(redistribute, ...args[4])
+    ]);
 }
 
 function* tweenRad(getState, dispatch, action) {

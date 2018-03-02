@@ -5,32 +5,15 @@ export const reducer = (state = {}, action) => {
 
     switch (action.type) {
         case actionTypes.SET__DATA:
-            // console.log('SET__DATA in reducer:', payload);
-
             return { ...state, data: payload };
         case actionTypes.TWEEN__DISTRIBUTION:
-            // console.log('TWEEN__DISTRIBUTION in reducer:', payload);
-
-            const index = payload.index;
-            const targets = state.targets;
-
-            return {
-                ...state,
-                targets: [
-                    ...targets.slice(0, index),
-                    payload.value,
-                    ...targets.slice(index + 1)
-                ]
-            };
+            return { ...state, targets: payload };
         case actionTypes.SET__RADII:
             return { ...state, radialStati: payload };
         case actionTypes.TWEEN__RADII:
-            console.log('TWEEN__RADII in reducer:', payload);
-
-            return {
-                ...state,
-                radialTargets: payload
-            };
+            return { ...state, radialTargets: payload };
+        case actionTypes.SET__SOCKET_STATUS:
+            return { ...state, socketConnected: payload };
         default:
             return state;
     }

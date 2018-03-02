@@ -8,19 +8,28 @@ class NumbersChanger extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { data: props.data };
+        this.state = { data: props.targets };
     }
 
     changeNumber = (index, value) => {
         if (value.length === 0) value = 0;
 
-        this.props.tweenDistribution(index, parseFloat(value));
+        const props = this.props;
+
+        const data = this.state.data;
+        const targets = props.targets;
+
+        props.tweenDistribution([
+            ...targets.slice(0, index),
+            parseFloat(value),
+            ...targets.slice(index + 1)
+        ]);
 
         this.setState({
             data: [
-                ...this.state.data.slice(0, index),
+                ...data.slice(0, index),
                 parseFloat(value),
-                ...this.state.data.slice(index + 1)
+                ...data.slice(index + 1)
             ]
         })
     }
@@ -34,7 +43,7 @@ class NumbersChanger extends React.Component {
     }
 
     componentWillReceiveProps = (nextProps) => {
-        this.setState({ data: nextProps.data });
+        this.setState({ data: nextProps.targets });
     }
 
     render() {
@@ -68,17 +77,15 @@ class NumbersChanger extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        data: state.data
+        data: state.data,
+        targets: state.targets
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        tweenDistribution: (index, value) => {
-            dispatch(tweenDistribution({
-                index: index,
-                value: value
-            }));
+        tweenDistribution: (targets) => {
+            dispatch(tweenDistribution(targets));
         }
     };
 };

@@ -12,19 +12,19 @@ export const App = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    };
 
     const middleStyle = {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
-    }
+    };
 
     const innerStyle = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
-    }
+    };
 
     return (
         <div style={appStyle}>
@@ -43,12 +43,12 @@ export const App = () => {
                         dataSet={'chart1'}
                     />
                 </div>
-                <div style={{ ...innerStyle, width: '200px' }}>
+                {/* <div style={{ ...innerStyle, width: '200px' }}>
                     <h2>
                         Enter new numbers to see the charts change.
                     </h2>
                     <NumbersChanger dataSet={'chart1'} />
-                </div>
+                </div> */}
             </div>
             {/* <div style={middleStyle}>
                 <div style={innerStyle}>
@@ -65,4 +65,4 @@ export const App = () => {
             </div> */}
         </div>
     );
-}
+};
