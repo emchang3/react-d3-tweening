@@ -1,5 +1,5 @@
 module.exports = {
-    entry: "./source/main.tsx",
+    entry: "./source/main.ts",
     output: {
         filename: "main.js",
         path: __dirname + "/public/javascripts"

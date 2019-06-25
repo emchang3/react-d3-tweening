@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { useContext, useState } from 'react';
 import { arc, DefaultArcObject, pie } from 'd3';
+import { useContext } from 'react';
+import * as React from 'react';
 
-import { RadialAction } from '../app';
 import { DataContext, RadialContext, SliceContext, TargetsContext } from '../contexts';
 
 import { colorScale } from '../util';

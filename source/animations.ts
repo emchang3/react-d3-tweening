@@ -1,6 +1,10 @@
 import { isEqual } from 'lodash';
 
-export const redistribute = (data: number[], setData: (data: number[]) => void, targets: number[]) => {
+export const redistribute = (
+    data: number[],
+    setData: (data: number[]) => void,
+    targets: number[]
+) => {
     const startTime = new Date().getTime();
 
     const tweenTimer = setInterval(() => {
@@ -18,7 +22,11 @@ export const redistribute = (data: number[], setData: (data: number[]) => void, 
     }, 10);
 };
 
-export const setRadius = (radii: number[], setRadii: (data: number[]) => void, radialTargets: number[]) => {
+export const setRadius = (
+    radii: number[],
+    setRadii: (data: number[]) => void,
+    radialTargets: number[]
+) => {
     const startTime = new Date().getTime();
 
     const tweenTimer = setInterval(() => {

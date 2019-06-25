@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
 import { isEqual } from 'lodash';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
 
-import { DataContext, TargetsContext, RadialContext, SliceContext, SocketContext } from './contexts';
+import { DataContext, RadialContext, SliceContext, SocketContext, TargetsContext } from './contexts';
 
 import socket from './socket';
 
+import { MultiContextProvider } from './multi-context-provider';
 import { PieChart } from './charts/pieChart';
 
 import { redistribute, setRadius } from './animations';
-import { MultiContextProvider } from './multi-context-provider';
 
 export enum RadialAction {
     GROW = 'grow',
@@ -45,8 +45,6 @@ export const App = () => {
         redistribute(data, setData, targets);
     }, [targets]);
 
-    const getCurrentSlice = () => currentSlice;
-
     useEffect(() => {
         const radialTargets = [ 1, 1, 1, 1, 1 ];
         if (currentSlice !== null) {
@@ -59,11 +57,9 @@ export const App = () => {
     useEffect(() => {
         const rt = setRadius(radii, setRadii, radialTargets);
 
-        if (rt !== radialTweener) {
-            clearInterval(radialTweener);
+        clearInterval(radialTweener);
 
-            setRadialTweener(rt);
-        }
+        setRadialTweener(rt);
     }, [radialTargets]);
 
     const appStyle = {
