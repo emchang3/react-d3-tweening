@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 
 // steelblue: 70, 130, 180
 
-export const colorScale = (point, color, data, focused, index) => {
+export const colorScale = (point: number, color: number[], data: number[], focused: number, index: number) => {
     let min = 0;
     let max = d3.max(data);
 
@@ -21,10 +21,10 @@ export const colorScale = (point, color, data, focused, index) => {
     const green = 255 - (ratio * (255 - color[1]));
     const blue = 255 - (ratio * (255 - color[2]));
 
-    return `rgb(${parseInt(red)}, ${parseInt(green)}, ${parseInt(blue)})`;
+    return `rgb(${red}, ${green}, ${blue})`;
 };
 
-export const colorScale2 = (point, color, max) => {
+export const colorScale2 = (point: number, color: number[], max: number) => {
     const min = 0;
     const range = max - min;
     const spot = point - min;
@@ -35,5 +35,5 @@ export const colorScale2 = (point, color, max) => {
     const green = 220 - (ratio * (220 - color[1]));
     const blue = 220 - (ratio * (220 - color[2]));
 
-    return `rgb(${parseInt(red)}, ${parseInt(green)}, ${parseInt(blue)})`;
+    return `rgb(${red}, ${green}, ${blue})`;
 };
