@@ -5,10 +5,4 @@ import { render } from 'react-dom';
 
 import { App } from './app';
 
-declare global {
-    interface Window {
-        devToolsExtension: () => any;
-    }
-}
-
 render(createElement(App), document.getElementById('root'));

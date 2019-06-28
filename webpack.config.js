@@ -1,27 +1,27 @@
 module.exports = {
-    entry: "./source/main.ts",
-    output: {
-        filename: "main.js",
-        path: __dirname + "/public/javascripts"
-    },
+  entry: "./source/main.ts",
+  output: {
+    filename: "main.js",
+    path: __dirname + "/public/javascripts"
+  },
 
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
+  // Enable sourcemaps for debugging webpack's output.
+  devtool: "source-map",
 
-    resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json"]
-    },
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: [".ts", ".tsx", ".js", ".json"]
+  },
 
-    mode: 'development',
+  mode: 'development',
 
-    module: {
-        rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+  module: {
+    rules: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-        ]
-    }
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+    ]
+  }
 };

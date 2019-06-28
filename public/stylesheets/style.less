@@ -1,10 +1,30 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 50px;
 }
 
 a {
   color: #00B7FF;
+}
+
+.app {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.middle {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.inner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-right: 80px;
 }
 
 .chart text {
@@ -12,8 +32,8 @@ a {
 }
 
 .bar text {
-    font: 10px sans-serif;
-    text-anchor: end;
+  font: 10px sans-serif;
+  text-anchor: end;
 }
 
 .arc text {
@@ -24,10 +44,9 @@ a {
 // .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
-  stroke-width: 1px;
   shape-rendering: crispEdges;
   stroke-width: 1px;
+  stroke: #000;
 }
 
 .axis--x path {
